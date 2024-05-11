@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit, DoCheck,
 
   calculate(){
     this.hourWage.set(this.user().minimumWage! / (this.user().daysPerWeek! * this.user().hoursPerDay! * this.weeksInMonth()));
-    this.todayWage.set(Number((this.daysPassed() * this.hourWage()).toFixed(2)));
+    this.todayWage.set(Number((this.daysPassed() * this.hourWage() * this.user().hoursPerDay!).toFixed(2 ))) ;
   }
 
   saveSettings(){

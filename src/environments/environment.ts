@@ -1,12 +1,12 @@
 export const environment = {
      production: false,
      firebaseConfig: {
-      apiKey: "process.env._APP_FIREBASE_API_KEY",
-      authDomain: "process.env._APP_FIREBASE_AUTH_DOMAIN",
-      databaseURL: "process.env._APP_FIREBASE_DATABASE_URL",
-      projectId: "process.env._APP_FIREBASE_PROJECT_ID",
-      storageBucket:" process.env._APP_FIREBASE_STORAGE_BUCKET",
-      messagingSenderId: "process.env._APP_FIREBASE_MESSAGING_SENDER_ID",
-      appId: "process.env._APP_FIREBASE_APP_ID"
-    }
+      apiKey: "AIzaSyD4RdbwJ2h87ONKYzuCuCjLYg0SPFDchzk",
+      authDomain: "money-2f2ef.firebaseapp.com",
+      databaseURL: "https://money-2f2ef-default-rtdb.firebaseio.com",
+      projectId: "money-2f2ef",
+      storageBucket: "money-2f2ef.appspot.com",
+      messagingSenderId: "346069710304",
+      appId: "1:346069710304:web:e76bdbb89a504a6e8fa785"
+     }
    };
