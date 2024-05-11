@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "money-2f2ef": {
+      "hosting": {
+        "money": [
+          "money-2f2ef"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "money-2f2ef"
+  }
+}

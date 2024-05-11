@@ -1,0 +1,52 @@
+<div  class="view-transition-name:stats flex flex-col relative p-1">
+  @if(user().user){
+    <div class=" view-transition-name:amountHome   bg-amber-100 h-fit md:w-[600px] mx-auto  rounded-2xl p-4 flex flex-col my-2">
+      @if(previousMonths().length > 0){
+        <span class="text-center text-lime-600 font-bold">Add previous months</span>
+        <div class="w-full flex flex-row gap-2"><span class="text-lime-600 font-bold">Select:</span>
+          <select class="bg-amber-100" [(ngModel)]="monthChoose">
+            <option  ion class="px-4 py-2" *ngFor="let option of previousMonths()" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <span class="text-center text-lime-600 font-bold">Add mount</span>
+        <input (keyup.enter)="addMonth()" [(ngModel)]="inputMonthAmount"  class="focus:outline-none bg-amber-100 border-2 border-lime-600 my-2 rounded-xl px-2">
+        <button (click)="addMonth()"   class="bg-black/5 hover:bg-black/10 rounded-xl text-lime-600 my-2">Add!</button>
+      }
+
+      <span class="text-center text-lime-600 font-bold">There's no previous months in this year to add! :D</span>
+
+    </div>
+    <h3 class="text-center text-amber-100 font-bold my-4">Last months</h3>
+  }
+
+  @if(user().lastmonts){
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col sm:flex-row gap-2 border-2 rounded-2xl p-2" *ngFor="let month of user().lastmonts">
+        <div class="w-full text-center flex flex-col justify-center">
+          <span class="text-white font-bold">{{ month.date }}</span>
+        </div>
+        <div class="w-full text-center flex flex-col justify-center items-center font-bold text-white">
+          <div class="flex flex-row gap-4 items-center">
+            $<input (keyup)="changingInput()" [(ngModel)]="month.amount" class="focus:outline-none text-center text-white bg-transparent border-2 border-white my-2 rounded-xl px-2">
+          </div>
+          <span class="flex flex-row px-4 rounded-2xl gap-2 text-base font-thin text-yellow-950 text-center bg-white">
+            Salary expected:
+            <span [ngClass]="{'text-red-500': month.amount < user().minimumWage!, 'text-lime-600': month.amount >= user().minimumWage!}" class="text-lime-600 flex flex-row items-center mx-auto font-bold">
+              {{formatterMoney( user().minimumWage !)}}
+              <span class="duration-400" [ngClass]="{'duration-500 transition rotate-90': month.amount < user().minimumWage!, 'rotate-0 duration-500 transition': month.amount >= user().minimumWage!}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="m3 17l6-6l4 4l8-8" />
+                    <path d="M17 7h4v4" />
+                  </g>
+                </svg>
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+      <span class="bg-white px-4 p-2">Overall: {{overAll()+user().amount!}} - Expected {{formatterMoney(user().minimumWage! * user().lastmonts!.length! + 1)}}</span>
+    </div>
+
+  }
+</div>

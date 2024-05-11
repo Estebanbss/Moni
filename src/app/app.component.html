@@ -1,0 +1,47 @@
+<app-title [title]="pageToReceive" ></app-title>
+<main class="min-w-screen min-h-screen bg-lime-600 relative flex flex-col">
+  @if(alert() !== '' && alert() !== undefined && alert() !== null){
+    <div id="alertBox" class=" text-white w-[240px] absolute bg-red-400  left-[50%] font-semibold -translate-x-[50%] rounded-lg px-4 py-2 h-[80px] flex  flex-row gap-2 justify-center items-center pointer-events-none z-50">
+      @if(alert() === 'It cant be empty' || alert() === 'Account not found' ||  alert() === 'It must be a number'){
+        <svg class="pointer-events-none dont" class="fill-white pointer-events-none"  xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
+      }
+      {{alert()}}
+    </div>
+  }
+<section class=" min-h-[calc(100vh_-_70px)] w-full h-full mx-auto sm:max-w-[600px] md:max-w-[700px] lg:max-w-[1000px] xl:max-w-[1220px] block p-4 md:p-8 font-mono pb-[70px]">
+  <div class="border-b-2 relative boder-white pb-5 flex flex-col sm:flex-row gap-2 min-h-[55px] justify-center items-center rounded-b-md">
+    <h2 class="text-2xl font-bold text-left text-white select-none">Moni! <span class="bg-white rounded-full">💰</span></h2>
+    @if(user().user){
+    <p class="text-white text-lg sm:ml-auto font-bold select-none">Hello!
+
+      <input (keyup)="updating()" class="bg-lime-600 max-w-[190px]  focus:border-none px-2 focus:ring-white focus:border-white focus:outline-none border border-lime-600 rounded-2xl focus:border focus:ring-2 hover:bg-white hover:bg-opacity-15 cursor-pointer focus:cursor-text " [(ngModel)]="user().user"></p>
+      <button (click)="showDialog.set(!showDialog())" class="hover:bg-white duration-500 hover:-rotate-12 hover:bg-opacity-15 rounded-2xl ">
+        <svg xmlns="http://www.w3.org/2000/svg" class="fill-white" width="30px" height="30px" viewBox="0 0 24 24">
+        <path  d="M4.993 11.016a1 1 0 0 1-.531-1.848L7.15 6.48a1 1 0 0 1 1.414 1.415l-1.121 1.12h7.55a1 1 0 0 1 0 2H5.015zm14.014 1.968a1 1 0 0 1 .531 1.848L16.85 17.52a1 1 0 1 1-1.414-1.415l1.121-1.12h-7.55a1 1 0 1 1 0-2h9.978z" />
+        </svg>
+      </button>
+    }
+    @if(showDialog()){
+     <dialog  id="dialog"  class="min-w-[200px] min-h-[50px]  left-0 top-[140px] sm:top-[70px]  ml-auto mr-0 bg-amber-100 rounded-xl p-2 font-bold flex flex-col backdrop:bg-black/10 z-50 border-2 border-lime-600/50">
+          <span class="text-lime-600 text-center">Change account</span>
+          <input (keyup.enter)="changeAccount()" [(ngModel)]="changeAccountInput" class="focus:outline-none bg-amber-100 border-2 border-lime-600 my-2 rounded-xl px-2">
+          <button (click)="changeAccount()" class="bg-black/5 hover:bg-black/10 rounded-xl text-lime-600">Login</button>
+          <div class="h-[20px] flex flex-row my-2"><span class="w-full h-0 mr-auto border-b my-auto border-lime-600/50"></span><span class="w-auto px-2">Or</span><span class="w-full ml-auto border-b h-0 my-auto border-lime-600/50"></span></div>
+          <span class="text-lime-600 text-center">New account!</span>
+          <button (click)="newAccount()" class="bg-black/5 hover:bg-black/10 rounded-xl text-lime-600 my-2">Create</button>
+
+    </dialog>
+    }
+
+  </div>
+
+  @if(pageToReceive === 'Home'){
+    <app-home [user]="user" [key]="key"></app-home>
+  }@else if(pageToReceive === 'Settings'){
+    <app-settings [user]="user" [key]="key"></app-settings>
+  }@else{
+    <app-stats [user]="user" [key]="key"></app-stats>
+  }
+</section>
+<app-navComponent [user]="user"(pageToSend)="receivePage($event)"></app-navComponent>
+</main>

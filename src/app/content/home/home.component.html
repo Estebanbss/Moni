@@ -1,0 +1,56 @@
+<div  class="view-transition-name:home flex flex-col md:flex-row relative p-1 gap-4 py-4">
+  @if(user().user){
+    <div class=" view-transition-name:amountHome md:w-[50%]  bg-amber-100 h-fit  rounded-2xl p-4 flex flex-col">
+      <div class="font-bold flex flex-col text-xl border-b-2 border-lime-600/50 py-2">
+        <span class="text-lime-600 text-xs sm:text-sm opacity-70">{{today()}} - {{lastDay()}}</span>
+        <span class="text-lime-600">{{formatterMoney(user().amount!)  }}</span>
+        <span class="text-base font-thin text-yellow-950">Current balance</span>
+      </div>
+      <div class="font-bold flex flex-col  py-2 border-b-2 border-lime-600/50">
+      <span class="flex flex-col text-base font-thin text-yellow-950 text-center ">
+        Minimum wage up to today
+        <span [ngClass]="{'text-red-500': todayWage() > user().amount!}"  class="text-lime-600 flex flex-row items-center mx-auto font-bold">{{formatterMoney(todayWage())}}
+          <span class="duration-400" [ngClass]="{'duration-500 transition rotate-90': todayWage() > user().amount!, 'rotate-0 duration-500 transition': todayWage() <= user().amount!}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="m3 17l6-6l4 4l8-8" />
+              <path d="M17 7h4v4" />
+            </g>
+          </svg>
+        </span>
+      </span>
+      </span>
+
+      </div>
+      </div>
+      <div class=" view-transition-name:amountAddingHome md:w-[50%]  bg-amber-100 h-fit  rounded-2xl p-4 flex flex-col font-bold">
+        <span class="text-lime-600 text-center">Add mount</span>
+        <input (keyup.enter)="adding()" [(ngModel)]="toAdding" class="focus:outline-none bg-amber-100 border-2 border-lime-600 my-2 rounded-xl px-2">
+        <button (click)="adding()"  class="bg-black/5 hover:bg-black/10 rounded-xl text-lime-600">Add</button>
+        <div class="h-[20px] flex flex-row my-2"><span class="w-full h-0 mr-auto border-b my-auto border-lime-600/50"></span><span class="w-auto px-2">Or</span><span class="w-full ml-auto border-b h-0 my-auto border-lime-600/50"></span></div>
+        <span class="text-lime-600 text-center">Substract days</span>
+        <input (keyup.enter)="substract()" [(ngModel)]="toSubstract"  class="focus:outline-none bg-amber-100 border-2 border-lime-600 my-2 rounded-xl px-2">
+        <button (click)="substract()"  class="bg-black/5 hover:bg-black/10 rounded-xl text-lime-600 my-2">Substract</button>
+      </div>
+
+  }
+
+</div>
+@if(user().user){
+  <div class="w-full border-t mb-20 flex flex-col py-4 gap-4">
+    <div class="flex flex-col max-w-[300px] mx-auto">
+      <span class="text-white text-center font-bold">Days per week</span>
+      <input (keyup.enter)="saveSettings()" [(ngModel)]="user().daysPerWeek"  class="focus:outline-none placeholder:text-lime-600 font-bold bg-amber-100 border-2 border-lime-600   rounded-xl px-2">
+    </div>
+    <div class="flex flex-col max-w-[300px] mx-auto">
+      <span class="text-white text-center font-bold">Hours per day</span>
+      <input (keyup.enter)="saveSettings()" [(ngModel)]="user().hoursPerDay"  class="focus:outline-none placeholder:text-lime-600 font-bold bg-amber-100 border-2 border-lime-600   rounded-xl px-2">
+    </div>
+    <div class="flex flex-col max-w-[300px] mx-auto">
+      <span class="text-white text-center font-bold">Minimum wage</span>
+      <input (keyup.enter)="saveSettings()" [(ngModel)]="user().minimumWage"  class="focus:outline-none placeholder:text-lime-600 font-bold bg-amber-100 border-2 border-lime-600   rounded-xl px-2">
+    </div>
+    <button (click)="saveSettings()"  class="bg-white px-5 hover:bg-white/70 font-bold py-0 max-h-[30px] mt-auto rounded-xl text-lime-600  mx-auto">Save</button>
+  </div>
+}
+
