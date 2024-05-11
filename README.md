@@ -1,7 +1,8 @@
 # Money
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
-
+Manage your income in a simple way 💰
+### [Demo](https://money-2f2ef.web.app/) ▶️
+## Overview
+![forthebadge](https://github.com/Estebanbss/Moni/blob/master/snapshot.png)
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
